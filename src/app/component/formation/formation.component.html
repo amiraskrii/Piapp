@@ -1,0 +1,336 @@
+
+
+
+<div>
+  <!-- Fixed navbar -->
+  <div class="navbar navbar-inverse navbar-fixed-top headroom" >
+    <div class="container">
+      <div class="navbar-header">
+        <!-- Button for smallest screens -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav pull-right">
+          <li class="active"><a routerLink="/agent">Home</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Simulateurs <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a routerLink="/scredia">Credit</a></li>
+              <li class="active"><a routerLink="/separgnea">Epargne</a></li>
+            </ul>
+          </li>
+          <li><a routerLink="/account">Account</a></li>
+          <li><a routerLink="/action">Action</a></li>
+          <li><a routerLink="/compte">Compte titre</a></li>
+          <li><a routerLink="/conge">Conge</a></li>
+          <li><a routerLink="/card">Credit card</a></li>
+          <li><a routerLink="/formation">Formation</a></li>
+          <li><a routerLink="/message">Message</a></li>
+          <li><a routerLink="/obligation">Obligation</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Autre <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a routerLink="/ordre">Ordre</a></li>
+              <li><a routerLink="/reclamation">ReclamationAssurance</a></li>
+              <li><a routerLink="/salaire">Salaire</a></li>
+              <li><a routerLink="/transaction">Transaction</a></li>
+              <li><a routerLink="/user">Users</a></li>
+            </ul>
+          <li>
+            <button class="btn btn-action" (click)="onLogOut()" >
+              <span>Logout</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- /.navbar -->
+
+  <header id="head" class="secondary"></header>
+
+  <!-- container -->
+  <div class="container">
+
+    <ol class="breadcrumb">
+      <li><a routerLink="/agent">Home</a></li>
+      <li class="active">Formation</li>
+    </ol>
+
+    <div class="row">
+
+      <!-- Article main content -->
+      <article class="col-sm-9 maincontent">
+        <header class="page-header">
+          <br>
+
+          <h1 class="page-title">List of Fomrations</h1>
+        </header>
+
+        <div class="row" >
+          <div class="col-md-6 col-xl-3">
+            <div class="card m-b-30">
+              <div class="card-body row">
+
+                <div class="col-6 card-title align-self-center mb-0">
+                  <h4>Nombre de foramtions par année : {{statics?.count}} </h4>
+
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="btn btn-action" (click)="onOpenModal(null,'add')">Add Formation <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="container" id="main-container">
+          <div class="row" >
+            <div *ngFor="let form of formations " class="col-md-6 col-xl-3">
+              <div class="card m-b-30">
+                <div class="card-body row">
+
+                  <div class="col-6 card-title align-self-center mb-0">
+                    <h5>Nom :{{form?.nom}}</h5>
+                    <h5>Date debut :{{form?.date_debut}}</h5>
+                    <h5>Date fin :{{form?.date_fin}}</h5>
+
+
+                  </div>
+                </div>
+
+                <div class="card-body">
+                  <div class="float-right btn-group btn-group-sm">
+                    <a (click)="onOpenModal(form, 'edit')"  class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                    <a (click)="onOpenModal(form, 'delete')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Add account Modal -->
+          <div class="modal fade" id="addFormationModal" tabindex="-1" role="dialog" aria-labelledby="addFormationModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addFormationModalLabel">Add Foramtion</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form #addForm="ngForm" (ngSubmit)="onAddFormation(addForm)">
+                    <div class="form-group">
+                      <label for="nom">Nom</label>
+                      <input type="text" ngModel name="nom" class="form-control" id="nom" placeholder="nom" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="date_debut">Date debut</label>
+                      <input type="date" ngModel name="date_debut" class="form-control" id="date_debut" placeholder="date_debut" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="date_fin">Date fin</label>
+                      <input type="date" ngModel name="date_fin" class="form-control" id="date_fin" placeholder="date_fin" required>
+                    </div>
+
+
+                    <div class="modal-footer">
+                      <button type="button" id="add-formation-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Edit Modal -->
+          <div class="modal fade" id="updateFormationModal" tabindex="-1" role="dialog" aria-labelledby="formationtEditModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="updateFormationModalLabel">Edit Formation </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form #editForm="ngForm">
+                    <input type="hidden" ngModel="{{editFormation?.id_}}" name="id_" class="form-control" id="id_" placeholder="id_">
+                    <div class="form-group">
+                      <label for="nom">Nom</label>
+                      <input type="text" ngModel="{{editFormation?.nom}}" ngModel name="nom" class="form-control" id="nom" placeholder="nom" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="date_debut">Date debut</label>
+                      <input type="date" ngModel="{{editFormation?.date_debut}}" ngModel name="date_debut" class="form-control" id="date_debut" placeholder="date_debut" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="date_fin">Date fin</label>
+                      <input type="date" ngModel="{{editFormation?.date_fin}}" ngModel name="date_fin" class="form-control" id="date_fin" placeholder="date_fin" required>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                      <button (click)="onUpdateFormation(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Delete Modal -->
+          <div class="modal fade" id="deleteFormationModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="deleteModelLabel">Delete Formation</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure you want to delete formation {{deleteFormation?.id_}}?</p>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button (click)="onDeleteFormation(deleteFormation?.id_)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Notification for no employees -->
+        <div *ngIf="formations?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+          <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">NO FORMATIONS!</h4>
+            <p>No Formation were found.</p>
+          </div>
+        </div>
+
+      </article>
+      <!-- /Article -->
+
+      <!-- Sidebar -->
+
+
+    </div>
+  </div>	<!-- /container -->
+
+  <!-- Social links. @TODO: replace by link/instructions in template -->
+  <section id="social">
+    <div class="container">
+      <div class="wrapper clearfix">
+        <!-- AddThis Button BEGIN -->
+        <div class="addthis_toolbox addthis_default_style">
+          <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+          <a class="addthis_button_tweet"></a>
+          <a class="addthis_button_linkedin_counter"></a>
+          <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+        </div>
+        <!-- AddThis Button END -->
+      </div>
+    </div>
+  </section>
+  <!-- /social links -->
+
+
+  <footer id="footer" class="top-space">
+
+    <div class="footer1">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-3 widget">
+            <h3 class="widget-title">Contact</h3>
+            <div class="widget-body">
+              <p>+216 55845828<br>
+                <a href="mailto:#">esprit2021@esprit.tn</a><br>
+                <br>
+                Ariana,Tunise
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-3 widget">
+            <h3 class="widget-title">Follow me</h3>
+            <div class="widget-body">
+              <p class="follow-me-icons">
+                <a href=""><i class="fa fa-twitter fa-2"></i></a>
+                <a href=""><i class="fa fa-dribbble fa-2"></i></a>
+                <a href=""><i class="fa fa-github fa-2"></i></a>
+                <a href=""><i class="fa fa-facebook fa-2"></i></a>
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 widget">
+            <h3 class="widget-title">Text widget</h3>
+            <div class="widget-body">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, dolores, quibusdam architecto voluptatem amet fugiat nesciunt placeat provident cumque accusamus itaque voluptate modi quidem dolore optio velit hic iusto vero praesentium repellat commodi ad id expedita cupiditate repellendus possimus unde?</p>
+              <p>Eius consequatur nihil quibusdam! Laborum, rerum, quis, inventore ipsa autem repellat provident assumenda labore soluta minima alias temporibus facere distinctio quas adipisci nam sunt explicabo officia tenetur at ea quos doloribus dolorum voluptate reprehenderit architecto sint libero illo et hic.</p>
+            </div>
+          </div>
+
+        </div> <!-- /row of widgets -->
+      </div>
+    </div>
+
+    <div class="footer2">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-6 widget">
+            <div class="widget-body">
+              <p class="simplenav">
+                <a routerLink="/agent">Home</a> |
+                <a routerLink="/scredia">Simulateur Credit</a> |
+                <a routerLink="/separgnea">Simulateur Epargne</a> |
+                <a routerLink="/account">Account</a> |
+                <a routerLink="/action">Action</a> |
+                <a routerLink="/compte">Compte titre</a> |
+                <a routerLink="/conge">Conge</a> |
+                <a routerLink="/card">Credit card</a> |
+                <a routerLink="/formation">Formation</a> |
+                <a routerLink="/obligation">Obligation</a> |
+                <a routerLink="/ordre">Ordre</a> |
+                <a routerLink="/reclamation">ReclamationAssurance</a> |
+                <a routerLink="/salaire">Salaire</a> |
+                <a routerLink="/transaction">Transaction</a> |
+                <a routerLink="/user">Users</a> |
+                <b><a (click)="onLogOut()">Logout</a></b>
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 widget">
+            <div class="widget-body">
+              <p class="text-right">
+                Copyright &copy; 2021, Your name. Designed by <a href="http://esprit.tn/" rel="designer">esprit</a>
+              </p>
+            </div>
+          </div>
+
+        </div> <!-- /row of widgets -->
+      </div>
+    </div>
+
+  </footer>
+
+</div>

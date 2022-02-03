@@ -1,0 +1,373 @@
+
+
+
+<div>
+  <!-- Fixed navbar -->
+  <div class="navbar navbar-inverse navbar-fixed-top headroom" >
+    <div class="container">
+      <div class="navbar-header">
+        <!-- Button for smallest screens -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav pull-right">
+          <li class="active"><a routerLink="/agent">Home</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Simulateurs <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a routerLink="/scredia">Credit</a></li>
+              <li class="active"><a routerLink="/separgnea">Epargne</a></li>
+            </ul>
+          </li>
+          <li><a routerLink="/account">Account</a></li>
+          <li><a routerLink="/action">Action</a></li>
+          <li><a routerLink="/compte">Compte titre</a></li>
+          <li><a routerLink="/conge">Conge</a></li>
+          <li><a routerLink="/card">Credit card</a></li>
+          <li><a routerLink="/formation">Formation</a></li>
+          <li><a routerLink="/message">Message</a></li>
+          <li><a routerLink="/obligation">Obligation</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Autre <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a routerLink="/ordre">Ordre</a></li>
+              <li><a routerLink="/reclamation">ReclamationAssurance</a></li>
+              <li><a routerLink="/salaire">Salaire</a></li>
+              <li><a routerLink="/transaction">Transaction</a></li>
+              <li><a routerLink="/user">Users</a></li>
+            </ul>
+          <li>
+            <button class="btn btn-action" (click)="onLogOut()" >
+              <span>Logout</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- /.navbar -->
+
+  <header id="head" class="secondary"></header>
+
+  <!-- container -->
+  <div class="container">
+
+    <ol class="breadcrumb">
+      <li><a routerLink="/agent">Home</a></li>
+      <li class="active">Action</li>
+    </ol>
+
+    <div class="row">
+
+      <!-- Article main content -->
+      <article class="col-sm-9 maincontent">
+        <header class="page-header">
+          <br>
+
+          <h1 class="page-title">List of actions</h1>
+        </header>
+
+
+        <div class="collapse navbar-collapse" id="navbarColor02">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="btn btn-action" (click)="onOpenModal(null,'add')">Add Action <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="container" id="main-container">
+          <div class="row" >
+            <div *ngFor="let action of actions" class="col-md-6 col-xl-3">
+              <div class="card m-b-30">
+                <div class="card-body row">
+
+                  <div class="col-6 card-title align-self-center mb-0">
+                    <h5>ISIN :{{action?.isin}}</h5>
+                    <h5>Sticker :{{action?.stiker}}</h5>
+                    <h5>Open :{{action?.open}}</h5>
+                    <h5>High :{{action?.high}}</h5>
+                    <h5>Low :{{action?.low}}</h5>
+                    <h5>Yield :{{action?.yield}}</h5>
+                    <h5>Close :{{action?.close}}</h5>
+                    <h5>Volume :{{action?.volume}}</h5>
+                    <h5>Variation :{{action?.variation}}</h5>
+
+                  </div>
+                </div>
+
+                <div class="card-body">
+                  <div class="float-right btn-group btn-group-sm">
+                    <a (click)="onOpenModal(action, 'edit')"  class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                    <a (click)="onOpenModal(action, 'delete')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add account Modal -->
+          <div class="modal fade" id="addActionModal" tabindex="-1" role="dialog" aria-labelledby="addActionModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addActionModalLabel">Add Action</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form #addForm="ngForm" (ngSubmit)="onAddAction(addForm)">
+                    <div class="form-group">
+                      <label for="isin">ISIN</label>
+                      <input type="text" ngModel name="isin" class="form-control" id="isin" placeholder="ISIN" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="stiker">Stiker</label>
+                      <input type="text" ngModel name="stiker" class="form-control" id="stiker" placeholder="stiker" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="open">Open</label>
+                      <input type="text" ngModel name="open" class="form-control" id="open" placeholder="open" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="high">High</label>
+                      <input type="text" ngModel name="high" class="form-control" id="high" placeholder="high" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="low">Low</label>
+                      <input type="text" ngModel name="low" class="form-control" id="low" placeholder="low" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="yield">Yield</label>
+                      <input type="text" ngModel name="yield" class="form-control" id="yield" placeholder="yield" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="close">Close</label>
+                      <input type="text" ngModel name="close" class="form-control" id="close" placeholder="close" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="volume">Volume</label>
+                      <input type="text" ngModel name="volume" class="form-control" id="volume" placeholder="volume" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="variation">Variation</label>
+                      <input type="text" ngModel name="variation" class="form-control" id="variation" placeholder="variation" required>
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" id="add-action-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Edit Modal -->
+          <div class="modal fade" id="updateActionModal" tabindex="-1" role="dialog" aria-labelledby="actiontEditModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="updateActionModalLabel">Edit Action </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form #editForm="ngForm">
+                    <input type="hidden" ngModel="{{editAction?.id_act}}" name="id_act" class="form-control" id="id_act" placeholder="id_action">
+                    <div class="form-group">
+                      <label for="isin">ISIN</label>
+                      <input type="text" ngModel="{{editAction?.isin}}" ngModel name="isin" class="form-control" id="isin" placeholder="ISIN" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="stiker">Stiker</label>
+                      <input type="text" ngModel="{{editAction?.stiker}}" ngModel name="stiker" class="form-control" id="stiker" placeholder="stiker" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="open">Open</label>
+                      <input type="text" ngModel="{{editAction?.open}}" ngModel name="open" class="form-control" id="open" placeholder="open" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="high">High</label>
+                      <input type="text" ngModel="{{editAction?.high}}" ngModel name="high" class="form-control" id="high" placeholder="high" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="low">Low</label>
+                      <input type="text" ngModel="{{editAction?.low}}" ngModel name="low" class="form-control" id="low" placeholder="low" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="yield">Yield</label>
+                      <input type="text" ngModel="{{editAction?.yield}}" ngModel name="yield" class="form-control" id="yield" placeholder="yield" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="close">Close</label>
+                      <input type="text" ngModel="{{editAction?.close}}" ngModel name="close" class="form-control" id="close" placeholder="close" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="volume">Volume</label>
+                      <input type="text" ngModel="{{editAction?.volume}}" ngModel name="volume" class="form-control" id="volume" placeholder="volume" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="variation">Variation</label>
+                      <input type="text" ngModel="{{editAction?.variation}}" ngModel name="variation" class="form-control" id="variation" placeholder="variation" required>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                      <button (click)="onUpdateAction(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Delete Modal -->
+          <div class="modal fade" id="deleteActionModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="deleteModelLabel">Delete Action</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure you want to delete action {{deleteAction?.isin}}?</p>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button (click)="onDeleteAction(deleteAction?.id_act)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Notification for no employees -->
+        <div *ngIf="actions?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+          <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">NO ACTIONS!</h4>
+            <p>No Action were found.</p>
+          </div>
+        </div>
+
+      </article>
+      <!-- /Article -->
+
+      <!-- Sidebar -->
+
+
+    </div>
+  </div>	<!-- /container -->
+
+  <!-- Social links. @TODO: replace by link/instructions in template -->
+  <section id="social">
+    <div class="container">
+      <div class="wrapper clearfix">
+        <!-- AddThis Button BEGIN -->
+        <div class="addthis_toolbox addthis_default_style">
+          <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+          <a class="addthis_button_tweet"></a>
+          <a class="addthis_button_linkedin_counter"></a>
+          <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+        </div>
+        <!-- AddThis Button END -->
+      </div>
+    </div>
+  </section>
+  <!-- /social links -->
+
+
+  <footer id="footer" class="top-space">
+
+    <div class="footer1">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-3 widget">
+            <h3 class="widget-title">Contact</h3>
+            <div class="widget-body">
+              <p>+216 55845828<br>
+                <a href="mailto:#">esprit2021@esprit.tn</a><br>
+                <br>
+                Ariana,Tunise
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-3 widget">
+            <h3 class="widget-title">Follow me</h3>
+            <div class="widget-body">
+              <p class="follow-me-icons">
+                <a href=""><i class="fa fa-twitter fa-2"></i></a>
+                <a href=""><i class="fa fa-dribbble fa-2"></i></a>
+                <a href=""><i class="fa fa-github fa-2"></i></a>
+                <a href=""><i class="fa fa-facebook fa-2"></i></a>
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 widget">
+            <h3 class="widget-title">Text widget</h3>
+            <div class="widget-body">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, dolores, quibusdam architecto voluptatem amet fugiat nesciunt placeat provident cumque accusamus itaque voluptate modi quidem dolore optio velit hic iusto vero praesentium repellat commodi ad id expedita cupiditate repellendus possimus unde?</p>
+              <p>Eius consequatur nihil quibusdam! Laborum, rerum, quis, inventore ipsa autem repellat provident assumenda labore soluta minima alias temporibus facere distinctio quas adipisci nam sunt explicabo officia tenetur at ea quos doloribus dolorum voluptate reprehenderit architecto sint libero illo et hic.</p>
+            </div>
+          </div>
+
+        </div> <!-- /row of widgets -->
+      </div>
+    </div>
+
+    <div class="footer2">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-6 widget">
+            <div class="widget-body">
+              <p class="simplenav">
+                <a routerLink="/agent">Home</a> |
+                <a routerLink="/scredia">Simulateur Credit</a> |
+                <a routerLink="/separgnea">Simulateur Epargne</a> |
+                <a routerLink="/account">Account</a> |
+                <a routerLink="/action">Action</a> |
+                <a routerLink="/compte">Compte titre</a> |
+                <a routerLink="/conge">Conge</a> |
+                <a routerLink="/card">Credit card</a> |
+                <a routerLink="/formation">Formation</a> |
+                <a routerLink="/obligation">Obligation</a> |
+                <a routerLink="/ordre">Ordre</a> |
+                <a routerLink="/reclamation">ReclamationAssurance</a> |
+                <a routerLink="/salaire">Salaire</a> |
+                <a routerLink="/transaction">Transaction</a> |
+                <a routerLink="/user">Users</a> |
+                <b><a (click)="onLogOut()">Logout</a></b>
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 widget">
+            <div class="widget-body">
+              <p class="text-right">
+                Copyright &copy; 2021, Your name. Designed by <a href="http://esprit.tn/" rel="designer">esprit</a>
+              </p>
+            </div>
+          </div>
+
+        </div> <!-- /row of widgets -->
+      </div>
+    </div>
+
+  </footer>
+
+</div>

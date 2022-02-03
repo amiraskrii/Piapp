@@ -1,0 +1,645 @@
+
+
+
+<div>
+  <!-- Fixed navbar -->
+  <div class="navbar navbar-inverse navbar-fixed-top headroom" >
+    <div class="container">
+      <div class="navbar-header">
+        <!-- Button for smallest screens -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav pull-right">
+          <li class="active"><a routerLink="/client">Home</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Simulateurs <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a routerLink="/scredic">Credit</a></li>
+              <li class="active"><a routerLink="/separgnec">Epargne</a></li>
+            </ul>
+          </li>
+          <li><a routerLink="/accountt">Account</a></li>
+          <li><a routerLink="/actionn">Action</a></li>
+          <li><a routerLink="/comptee">Compte titre</a></li>
+          <li><a routerLink="/congee">Conge</a></li>
+          <li><a routerLink="/cardd">Credit card</a></li>
+          <li><a routerLink="/formationn">Formation</a></li>
+          <li><a routerLink="/messagee">Message</a></li>
+          <li><a routerLink="/obligationn">Obligation</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Autre <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a routerLink="/ordree">Ordre</a></li>
+              <li><a routerLink="/reclamationn">ReclamationAssurance</a></li>
+              <li><a routerLink="/salairee">Salaire</a></li>
+              <li><a routerLink="/transactionn">Transaction</a></li>
+            </ul>
+          <li>
+            <button class="btn btn-action" (click)="onLogOut()" >
+              <span>Logout</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- /.navbar -->
+
+  <header id="head" class="secondary"></header>
+
+  <!-- container -->
+  <div class="container">
+
+    <ol class="breadcrumb">
+      <li><a routerLink="/client">Home</a></li>
+      <li class="active">ReclamationAssurance</li>
+    </ol>
+
+    <div class="row">
+
+      <!-- Article main content -->
+      <article class="col-sm-9 maincontent">
+        <header class="page-header">
+          <br>
+
+          <h1 class="page-title">List of Reclamations Assurances</h1>
+        </header>
+
+
+
+        <div class="collapse navbar-collapse" id="navbarColor02">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="btn btn-action" (click)="onOpenModal(null,'add')">Add Reclamation Assurance <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="container" id="main-container">
+          <div class="row" >
+            <div *ngFor="let recl of reclamationAssurances" class="col-md-6 col-xl-3">
+              <div class="card m-b-30">
+                <div class="card-body row">
+
+                  <div class="col-6 card-title align-self-center mb-0">
+                    <h5>Policy state :{{recl.policy_state}}</h5>
+                    <h5>Policy csl :{{recl.policy_csl}}</h5>
+                    <h5>Incident type :{{recl.incident_type}}</h5>
+                    <h5>Incident severity :{{recl.incident_severity}}</h5>
+                    <h5>Incident state :{{recl.incident_state}}</h5>
+                    <h5>Incident city :{{recl.incident_city}}</h5>
+                    <h5>Auto make :{{recl.auto_make}}</h5>
+                    <h5>Auto model :{{recl.auto_model}}</h5>
+                    <h5>Collision type :{{recl.collision_type}}</h5>
+                    <h5>Proprety damage :{{recl.proprety_damage}}</h5>
+                    <h5>Policy report available :{{recl.policy_report_available}}</h5>
+                    <h5>Authorities contacted :{{recl.authorities_contacted}}</h5>
+                    <h5>Amount to refand :{{recl.amount_to_refand}}</h5>
+                    <h5>State :{{recl.state}}</h5>
+                    <h5>Fraud :{{recl.fraud}}</h5>
+
+
+
+                  </div>
+                </div>
+
+                <div class="card-body">
+                  <div class="float-right btn-group btn-group-sm">
+                    <a (click)="onOpenModal(recl, 'edit')"  class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                    <a (click)="onOpenModal(recl, 'delete')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add account Modal -->
+          <div class="modal fade" id="addReclamationassuranceModal" tabindex="-1" role="dialog" aria-labelledby="addReclamationassuranceModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addReclamationassuranceModalLabel">Add Reclamationassurance</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form #addForm="ngForm" (ngSubmit)="onAddReclamation_assurance(addForm)">
+                    <div class="form-group">
+                      <label for="policy_state">Policy state</label>
+                      <select name="policy_state" ngModel id="policy_state" required class="form-control">
+                        <option value="OH">OH</option>
+                        <option value="IN">IN</option>
+                        <option value="IL">IL</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="policy_csl">Policy csl</label>
+                      <select name="policy_csl" ngModel id="policy_csl" required class="form-control">
+                        <option value="type1">250/500</option>
+                        <option value="type2">100/300</option>
+                        <option value="type3">500/1000</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="incident_type">Incident type</label>
+                      <select name="incident_type" ngModel id="incident_type" required class="form-control">
+                        <option value="single_vehicule_collision">single vehicule collision</option>
+                        <option value="vehicule_theft">vehicule theft</option>
+                        <option value="multi_vehicule_collision">multi vehicule collision</option>
+                        <option value="parked_car">parked car</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="incident_severity">Incident severity</label>
+                      <select name="incident_severity" ngModel id="incident_severity" required class="form-control">
+                        <option value="major_damage">major damage</option>
+                        <option value="minor_damage">minor damage</option>
+                        <option value="total_loss">total loss</option>
+                        <option value="trivial_damage">trivial damage</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="incident_state">Incident state</label>
+                      <select name="incident_state" ngModel id="incident_state" required class="form-control">
+                        <option value="SC">SC</option>
+                        <option value="VA">VA</option>
+                        <option value="WV">WV</option>
+                        <option value="NC">NC</option>
+                        <option value="PA">PA</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="incident_city">Incident city</label>
+                      <select name="incident_city" ngModel id="incident_city" required class="form-control">
+                        <option value="Columbus">Columbus</option>
+                        <option value="Riverwood">Riverwood</option>
+                        <option value="Arlington">Arlington</option>
+                        <option value="springfield">springfield</option>
+                        <option value="hillsdale">hillsdale</option>
+                        <option value="northbend">northbend</option>
+                        <option value="northbrook">northbrook</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="auto_make">Auto make</label>
+                      <select name="auto_make" ngModel id="auto_make" required class="form-control">
+                        <option value="saab">saab</option>
+                        <option value="mercedes">mercedes</option>
+                        <option value="dodge">dodge</option>
+                        <option value="chevrolet">chevrolet</option>
+                        <option value="accura">accura</option>
+                        <option value="nissan">nissan</option>
+                        <option value="audi">audi</option>
+                        <option value="toyota">toyota</option>
+                        <option value="ford">ford</option>
+                        <option value="suburu">suburu</option>
+                        <option value="bmw">bmw</option>
+                        <option value="jeep">jeep</option>
+                        <option value="honda">honda</option>
+                        <option value="volkswagen">volkswagen</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="auto_model">Auto model</label>
+                      <select name="auto_model" ngModel id="auto_model" required class="form-control">
+                        <option value="92x">92x</option>
+                        <option value="e400">e400</option>
+                        <option value="ram">ram</option>
+                        <option value="tahoe">tahoe</option>
+                        <option value="rsx">rsx</option>
+                        <option value="95">95</option>
+                        <option value="pathfinder">pathfinder</option>
+                        <option value="a5">a5</option>
+                        <option value="camry">camry</option>
+                        <option value="f150">f150</option>
+                        <option value="a3">a3</option>
+                        <option value="highlander">highlander</option>
+                        <option value="neon">neon</option>
+                        <option value="mdx">mdx</option>
+                        <option value="maxima">maxima</option>
+                        <option value="legacy">legacy</option>
+                        <option value="tl">tl</option>
+                        <option value="impreza">impreza</option>
+                        <option value="forrestor">forrestor</option>
+                        <option value="escape">escape</option>
+                        <option value="corolla">corolla</option>
+                        <option value="3_series">3_series</option>
+                        <option value="c300">c300</option>
+                        <option value="wrangler">wrangler</option>
+                        <option value="m5">m5</option>
+                        <option value="x5">x5</option>
+                        <option value="civic">civic</option>
+                        <option value="passat">passat</option>
+                        <option value="silverado">silverado</option>
+                        <option value="crv">crv</option>
+                        <option value="93">93</option>
+                        <option value="accord">accord</option>
+                        <option value="x6">x6</option>
+                        <option value="malibu">malibu</option>
+                        <option value="fusion">fusion</option>
+                        <option value="jetta">jetta</option>
+                        <option value="ml350">ml350</option>
+                        <option value="ultima">ultima</option>
+                        <option value="grand_cherokee">grand_cherokee</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="collision_type">Collision type</label>
+                      <select name="collision_type" ngModel id="collision_type" required class="form-control">
+                        <option value="side_collision">side collision</option>
+                        <option value="rear_collision">rear collision</option>
+                        <option value="front_collision">front collision</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="proprety_damage">Proprety damage</label>
+                      <select name="proprety_damage" ngModel id="proprety_damage" required class="form-control">
+                        <option value="yes">yes</option>
+                        <option value="no">no</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="policy_report_available">Policy report available</label>
+                      <select name="policy_report_available" ngModel id="policy_report_available" required class="form-control">
+                        <option value="yes">yes</option>
+                        <option value="no">no</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="authorities_contacted">Authorities contacted</label>
+                      <select name="authorities_contacted" ngModel id="authorities_contacted" required class="form-control">
+                        <option value="police">police</option>
+                        <option value="none">none</option>
+                        <option value="fire">fire</option>
+                        <option value="ambulance">ambulance</option>
+                      </select>
+                    </div>
+
+
+
+                    <div class="form-group">
+                      <label for="amount_to_refand">Amount to refand</label>
+                      <input type="text" ngModel name="amount_to_refand" class="form-control" id="amount_to_refand" placeholder="amount_to_refand" required>
+                    </div>
+
+
+                    <div class="modal-footer">
+                      <button type="button" id="add-reclamationassurance-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Edit Modal -->
+          <div class="modal fade" id="updateReclamationassuranceModal" tabindex="-1" role="dialog" aria-labelledby="reclamationAssurancetEditModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="updateReclamationassuranceModalLabel">Edit Reclamationassurance </h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form #editForm="ngForm">
+                    <input type="hidden" ngModel="{{editReclamation_assurance?.id_r}}" name="id_r" class="form-control" id="id_r" placeholder="id_r">
+                    <div class="form-group">
+                      <label for="policy_state">Policy state</label>
+                      <select name="policy_state" ngModel="{{editReclamation_assurance?.policy_state}}" ngModel id="policy_state" required class="form-control">
+                        <option value="OH">OH</option>
+                        <option value="IN">IN</option>
+                        <option value="IL">IL</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="policy_csl">Policy csl</label>
+                      <select name="policy_csl" ngModel="{{editReclamation_assurance?.policy_csl}}" ngModel id="policy_csl" required class="form-control">
+                        <option value="type1">250/500</option>
+                        <option value="type2">100/300</option>
+                        <option value="type3">500/1000</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="incident_type">Incident type</label>
+                      <select name="incident_type" ngModel="{{editReclamation_assurance?.incident_type}}" ngModel id="incident_type" required class="form-control">
+                        <option value="single_vehicule_collision">single vehicule collision</option>
+                        <option value="vehicule_theft">vehicule theft</option>
+                        <option value="multi_vehicule_collision">multi vehicule collision</option>
+                        <option value="parked_car">parked car</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="incident_severity">Incident severity</label>
+                      <select name="incident_severity" ngModel="{{editReclamation_assurance?.incident_severity}}" ngModel id="incident_severity" required class="form-control">
+                        <option value="major_damage">major damage</option>
+                        <option value="minor_damage">minor damage</option>
+                        <option value="total_loss">total loss</option>
+                        <option value="trivial_damage">trivial damage</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="incident_state">Incident state</label>
+                      <select name="incident_state" ngModel="{{editReclamation_assurance?.incident_state}}" ngModel id="incident_state" required class="form-control">
+                        <option value="SC">SC</option>
+                        <option value="VA">VA</option>
+                        <option value="WV">WV</option>
+                        <option value="NC">NC</option>
+                        <option value="PA">PA</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="incident_city">Incident city</label>
+                      <select name="incident_city" ngModel="{{editReclamation_assurance?.incident_city}}" ngModel id="incident_city" required class="form-control">
+                        <option value="Columbus">Columbus</option>
+                        <option value="Riverwood">Riverwood</option>
+                        <option value="Arlington">Arlington</option>
+                        <option value="springfield">springfield</option>
+                        <option value="hillsdale">hillsdale</option>
+                        <option value="northbend">northbend</option>
+                        <option value="northbrook">northbrook</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="auto_make">Auto make</label>
+                      <select name="auto_make" ngModel="{{editReclamation_assurance?.auto_make}}" ngModel id="auto_make" required class="form-control">
+                        <option value="saab">saab</option>
+                        <option value="mercedes">mercedes</option>
+                        <option value="dodge">dodge</option>
+                        <option value="chevrolet">chevrolet</option>
+                        <option value="accura">accura</option>
+                        <option value="nissan">nissan</option>
+                        <option value="audi">audi</option>
+                        <option value="toyota">toyota</option>
+                        <option value="ford">ford</option>
+                        <option value="suburu">suburu</option>
+                        <option value="bmw">bmw</option>
+                        <option value="jeep">jeep</option>
+                        <option value="honda">honda</option>
+                        <option value="volkswagen">volkswagen</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="auto_model">Auto model</label>
+                      <select name="auto_model" ngModel="{{editReclamation_assurance?.auto_model}}" ngModel id="auto_model" required class="form-control">
+                        <option value="92x">92x</option>
+                        <option value="e400">e400</option>
+                        <option value="ram">ram</option>
+                        <option value="tahoe">tahoe</option>
+                        <option value="rsx">rsx</option>
+                        <option value="95">95</option>
+                        <option value="pathfinder">pathfinder</option>
+                        <option value="a5">a5</option>
+                        <option value="camry">camry</option>
+                        <option value="f150">f150</option>
+                        <option value="a3">a3</option>
+                        <option value="highlander">highlander</option>
+                        <option value="neon">neon</option>
+                        <option value="mdx">mdx</option>
+                        <option value="maxima">maxima</option>
+                        <option value="legacy">legacy</option>
+                        <option value="tl">tl</option>
+                        <option value="impreza">impreza</option>
+                        <option value="forrestor">forrestor</option>
+                        <option value="escape">escape</option>
+                        <option value="corolla">corolla</option>
+                        <option value="3_series">3_series</option>
+                        <option value="c300">c300</option>
+                        <option value="wrangler">wrangler</option>
+                        <option value="m5">m5</option>
+                        <option value="x5">x5</option>
+                        <option value="civic">civic</option>
+                        <option value="passat">passat</option>
+                        <option value="silverado">silverado</option>
+                        <option value="crv">crv</option>
+                        <option value="93">93</option>
+                        <option value="accord">accord</option>
+                        <option value="x6">x6</option>
+                        <option value="malibu">malibu</option>
+                        <option value="fusion">fusion</option>
+                        <option value="jetta">jetta</option>
+                        <option value="ml350">ml350</option>
+                        <option value="ultima">ultima</option>
+                        <option value="grand_cherokee">grand_cherokee</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="collision_type">Collision type</label>
+                      <select name="collision_type" ngModel="{{editReclamation_assurance?.collision_type}}" ngModel id="collision_type" required class="form-control">
+                        <option value="side_collision">side collision</option>
+                        <option value="rear_collision">rear collision</option>
+                        <option value="front_collision">front collision</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="proprety_damage">Proprety damage</label>
+                      <select name="proprety_damage" ngModel="{{editReclamation_assurance?.proprety_damage}}" ngModel id="proprety_damage" required class="form-control">
+                        <option value="yes">yes</option>
+                        <option value="no">no</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="policy_report_available">Policy report available</label>
+                      <select name="policy_report_available" ngModel="{{editReclamation_assurance?.policy_report_available}}" ngModel id="policy_report_available" required class="form-control">
+                        <option value="yes">yes</option>
+                        <option value="no">no</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="authorities_contacted">Authorities contacted</label>
+                      <select name="authorities_contacted" ngModel="{{editReclamation_assurance?.authorities_contacted}}" ngModel id="authorities_contacted" required class="form-control">
+                        <option value="police">police</option>
+                        <option value="none">none</option>
+                        <option value="fire">fire</option>
+                        <option value="ambulance">ambulance</option>
+                      </select>
+                    </div>
+
+
+                    <div class="form-group">
+                      <label for="amount_to_refand">Amount to refand</label>
+                      <input type="text" ngModel="{{editReclamation_assurance?.amount_to_refand}}" ngModel name="amount_to_refand" class="form-control" id="amount_to_refand" placeholder="amount_to_refand" required>
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                      <button (click)="onUpdateReclamation_assurance(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Delete Modal -->
+          <div class="modal fade" id="deleteReclamationassuranceModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="deleteModelLabel">Delete Reclamationassurance</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure you want to delete Reclamationassurance {{deleteReclamation_assurance?.id_r}}?</p>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button (click)="onDeleteReclamation_assurance(deleteReclamation_assurance?.id_r)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Notification for no employees -->
+        <div *ngIf="reclamationAssurances?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+          <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading">NO CREDIT RECLAMATION ASSURANCES!</h4>
+            <p>No Reclamationassurance card were found.</p>
+          </div>
+        </div>
+
+      </article>
+      <!-- /Article -->
+
+      <!-- Sidebar -->
+
+
+    </div>
+  </div>	<!-- /container -->
+
+  <!-- Social links. @TODO: replace by link/instructions in template -->
+  <section id="social">
+    <div class="container">
+      <div class="wrapper clearfix">
+        <!-- AddThis Button BEGIN -->
+        <div class="addthis_toolbox addthis_default_style">
+          <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+          <a class="addthis_button_tweet"></a>
+          <a class="addthis_button_linkedin_counter"></a>
+          <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+        </div>
+        <!-- AddThis Button END -->
+      </div>
+    </div>
+  </section>
+  <!-- /social links -->
+
+
+  <footer id="footer" class="top-space">
+
+    <div class="footer1">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-3 widget">
+            <h3 class="widget-title">Contact</h3>
+            <div class="widget-body">
+              <p>+216 55845828<br>
+                <a href="mailto:#">esprit2021@esprit.tn</a><br>
+                <br>
+                Ariana,Tunise
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-3 widget">
+            <h3 class="widget-title">Follow me</h3>
+            <div class="widget-body">
+              <p class="follow-me-icons">
+                <a href=""><i class="fa fa-twitter fa-2"></i></a>
+                <a href=""><i class="fa fa-dribbble fa-2"></i></a>
+                <a href=""><i class="fa fa-github fa-2"></i></a>
+                <a href=""><i class="fa fa-facebook fa-2"></i></a>
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 widget">
+            <h3 class="widget-title">Text widget</h3>
+            <div class="widget-body">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, dolores, quibusdam architecto voluptatem amet fugiat nesciunt placeat provident cumque accusamus itaque voluptate modi quidem dolore optio velit hic iusto vero praesentium repellat commodi ad id expedita cupiditate repellendus possimus unde?</p>
+              <p>Eius consequatur nihil quibusdam! Laborum, rerum, quis, inventore ipsa autem repellat provident assumenda labore soluta minima alias temporibus facere distinctio quas adipisci nam sunt explicabo officia tenetur at ea quos doloribus dolorum voluptate reprehenderit architecto sint libero illo et hic.</p>
+            </div>
+          </div>
+
+        </div> <!-- /row of widgets -->
+      </div>
+    </div>
+
+    <div class="footer2">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-6 widget">
+            <div class="widget-body">
+              <p class="simplenav">
+                <a routerLink="/client">Home</a> |
+                <a routerLink="/scredic">Simulateur Credit</a> |
+                <a routerLink="/separgnec">Simulateur Epargne</a> |
+                <a routerLink="/accountt">Account</a> |
+                <a routerLink="/actionn">Action</a> |
+                <a routerLink="/comptee">Compte titre</a> |
+                <a routerLink="/congee">Conge</a> |
+                <a routerLink="/cardd">Credit card</a> |
+                <a routerLink="/formationn">Formation</a> |
+                <a routerLink="/obligationn">Obligation</a> |
+                <a routerLink="/ordree">Ordre</a> |
+                <a routerLink="/reclamationn">ReclamationAssurance</a> |
+                <a routerLink="/salairee">Salaire</a> |
+                <a routerLink="/transactionn">Transaction</a> |
+                <b><a (click)="onLogOut()">Logout</a></b>
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 widget">
+            <div class="widget-body">
+              <p class="text-right">
+                Copyright &copy; 2021, Your name. Designed by <a href="http://esprit.tn/" rel="designer">esprit</a>
+              </p>
+            </div>
+          </div>
+
+        </div> <!-- /row of widgets -->
+      </div>
+    </div>
+
+  </footer>
+
+</div>

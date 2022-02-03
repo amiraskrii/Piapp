@@ -1,0 +1,245 @@
+
+
+<div>
+<!-- Fixed navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top headroom" >
+  <div class="container">
+    <div class="navbar-header">
+      <!-- Button for smallest screens -->
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav pull-right">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Simulateurs <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a routerLink="/scredi">Credit</a></li>
+            <li class="active"><a routerLink="/separgne">Epargne</a></li>
+          </ul>
+        </li>
+        <li class="active"><a class="btn" routerLink="/login">SIGN IN / SIGN UP</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
+<!-- /.navbar -->
+
+<header id="head" class="secondary"></header>
+
+<!-- container -->
+<div class="container">
+
+  <ol class="breadcrumb">
+    <li><a href="index.html">Home</a></li>
+    <li class="active">Registration</li>
+  </ol>
+
+  <div class="row">
+
+    <!-- Article main content -->
+    <article class="col-xs-12 maincontent">
+      <header class="page-header">
+        <h1 class="page-title">Registration</h1>
+      </header>
+
+      <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <h3 class="thin text-center">Register a new account</h3>
+             <a routerLink="/login">Login</a>
+            <hr>
+
+            <form #registerForm="ngForm" (ngSubmit)="onRegister(registerForm.value)">
+              <div class="top-margin">
+                <label>First Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="firstName" required ngModel #firstNameInput="ngModel">
+              </div>
+              <span class="help-block" *ngIf="firstNameInput.invalid && firstNameInput.touched" style="color:red;">Please enter a first name</span>
+              <div class="top-margin">
+                <label>Last Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="lastName" required ngModel #lastNameInput="ngModel">
+              </div>
+              <span class="help-block" *ngIf="lastNameInput.invalid && lastNameInput.touched" style="color:red;">Please enter a last name</span>
+              <div class="top-margin">
+                <label>Email Address <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="email" required ngModel #emailInput="ngModel">
+              </div>
+              <span class="help-block" *ngIf="emailInput.invalid && emailInput.touched" style="color:red;">Please enter an email.</span>
+              <div class="top-margin">
+                <label>Username <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="username" required ngModel #usernameInput="ngModel">
+              </div>
+              <span class="help-block" *ngIf="usernameInput.invalid && usernameInput.touched" style="color:red;">Please enter a username</span>
+              <div class="form-group">
+                <label for="sex">Sex <span class="text-danger">*</span></label>
+                <select name="sex" ngModel id="sex" required class="form-control">
+                  <option value="male">male</option>
+                  <option value="female">female</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="education_level">Education level <span class="text-danger">*</span></label>
+                <select name="education_level" ngModel id="education_level" required class="form-control">
+                  <option value="MD">MD</option>
+                  <option value="PhD">PhD</option>
+                  <option value="associate">associate</option>
+                  <option value="masters">masters</option>
+                  <option value="high_school">high school</option>
+                  <option value="college">college</option>
+                  <option value="JD">JD</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="hobbies">Hobbies <span class="text-danger">*</span></label>
+                <select name="hobbies" ngModel id="hobbies" required class="form-control">
+                  <option value="sleeping">sleeping</option>
+                  <option value="reading">reading</option>
+                  <option value="board_games">board_games</option>
+                  <option value="bungie_jumping">bungie jumping</option>
+                  <option value="base_jumping">base jumping</option>
+                  <option value="golf">golf</option>
+                  <option value="camping">camping</option>
+                  <option value="dancing">dancing</option>
+                  <option value="skydiving">skydiving</option>
+                  <option value="movies">movies</option>
+                  <option value="hiking">hiking</option>
+                  <option value="yatching">watching</option>
+                  <option value="paintball">paintball</option>
+                  <option value="chess">chess</option>
+                  <option value="kayaking">kayaking</option>
+                  <option value="polo">polo</option>
+                  <option value="basketball">basketball</option>
+                  <option value="video_games">video_games</option>
+                  <option value="cross_fit">cross fit</option>
+                  <option value="exercise">exercise</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="occupation">Occupation <span class="text-danger">*</span></label>
+                <select name="occupation" ngModel id="occupation" required class="form-control">
+                  <option value="craft_repair">craft repair</option>
+                  <option value="machine_op_inspct">machine op inspct</option>
+                  <option value="sales">sales</option>
+                  <option value="armed_forces">armed forces</option>
+                  <option value="tech_support">tech support</option>
+                  <option value="prof_specialty">prof specialty</option>
+                  <option value="other_service">other service</option>
+                  <option value="priv_house_serv">priv house serv</option>
+                  <option value="exec_managerial">exec managerial</option>
+                  <option value="protective_serv">protective serv</option>
+                  <option value="transport_moving">transport moving</option>
+                  <option value="handlers_cleaners">handlers cleaners</option>
+                  <option value="adm_clerical">adm clerical</option>
+                  <option value="farming_fishing">farming fishing</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="relationship">Relationship <span class="text-danger">*</span></label>
+                <select name="relationship" ngModel id="relationship" required class="form-control">
+                  <option value="husband">husband</option>
+                  <option value="other_relative">other relative</option>
+                  <option value="own_child">own child</option>
+                  <option value="unmarried">unmarried</option>
+                  <option value="wife">wife</option>
+                  <option value="not_in_family">not in family</option>
+                </select>
+              </div>
+              <hr>
+
+              <div class="row">
+                <div class="col-lg-8">
+
+                </div>
+                <div class="col-lg-4 text-right">
+                  <button [disabled]="registerForm.invalid || showLoading" class="btn btn-action" type="submit">
+                    <i *ngIf="showLoading" ></i>&nbsp;&nbsp;
+                    <span *ngIf="showLoading">Loading...</span>
+                    <span *ngIf="!showLoading">Register</span>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </article>
+    <!-- /Article -->
+
+  </div>
+</div>	<!-- /container -->
+
+
+  <footer id="footer" class="top-space">
+
+    <div class="footer1">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-3 widget">
+            <h3 class="widget-title">Contact</h3>
+            <div class="widget-body">
+              <p>+216 55845828<br>
+                <a href="mailto:#">esprit2021@esprit.tn</a><br>
+                <br>
+                Ariana,Tunise
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-3 widget">
+            <h3 class="widget-title">Follow me</h3>
+            <div class="widget-body">
+              <p class="follow-me-icons">
+                <a href=""><i class="fa fa-twitter fa-2"></i></a>
+                <a href=""><i class="fa fa-dribbble fa-2"></i></a>
+                <a href=""><i class="fa fa-github fa-2"></i></a>
+                <a href=""><i class="fa fa-facebook fa-2"></i></a>
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 widget">
+            <h3 class="widget-title">Text widget</h3>
+            <div class="widget-body">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, dolores, quibusdam architecto voluptatem amet fugiat nesciunt placeat provident cumque accusamus itaque voluptate modi quidem dolore optio velit hic iusto vero praesentium repellat commodi ad id expedita cupiditate repellendus possimus unde?</p>
+              <p>Eius consequatur nihil quibusdam! Laborum, rerum, quis, inventore ipsa autem repellat provident assumenda labore soluta minima alias temporibus facere distinctio quas adipisci nam sunt explicabo officia tenetur at ea quos doloribus dolorum voluptate reprehenderit architecto sint libero illo et hic.</p>
+            </div>
+          </div>
+
+        </div> <!-- /row of widgets -->
+      </div>
+    </div>
+
+    <div class="footer2">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-6 widget">
+            <div class="widget-body">
+              <p class="simplenav">
+                <a routerLink="/home">Home</a> |
+                <a routerLink="/scredi">Simulateur Credit</a> |
+                <a routerLink="/separgne">Simulateur Epargne</a> |
+                <b><a routerLink="/login">Sign up</a></b>
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 widget">
+            <div class="widget-body">
+              <p class="text-right">
+                Copyright &copy; 2021, Your name. Designed by <a href="http://esprit.tn/" rel="designer">esprit</a>
+              </p>
+            </div>
+          </div>
+
+        </div> <!-- /row of widgets -->
+      </div>
+    </div>
+
+  </footer>
+</div>

@@ -1,0 +1,63 @@
+export class Prediction{
+  public V1 : number ;
+  public V2 : number ;
+  public V3 : number ;
+  public V4 : number ;
+  public V5 : number ;
+  public V6 : number ;
+  public V7 : number ;
+  public V8 : number ;
+  public V9 : number ;
+  public V10 : number ;
+  public V11 : number ;
+  public V12 : number ;
+  public V13 : number ;
+  public V14 : number ;
+  public V15 : number ;
+  public V16 : number ;
+  public V17 : number ;
+  public V18 : number ;
+  public V19 : number ;
+  public V20 : number ;
+  public V21 : number ;
+  public V22 : number ;
+  public V23 : number ;
+  public V24 : number ;
+  public V25 : number ;
+  public V26 : number ;
+  public V27 : number ;
+  public V28 : number ;
+  public amount : number ;
+
+  constructor() {
+    this.V1 = null;
+    this.V2 = null;
+    this.V3 = null;
+    this.V4 = null;
+    this.V5 = null;
+    this.V6 = null;
+    this.V7 = null;
+    this.V8 = null;
+    this.V9 = null;
+    this.V10 = null;
+    this.V11 = null;
+    this.V12 = null;
+    this.V13 = null;
+    this.V14 = null;
+    this.V15 = null;
+    this.V16 = null;
+    this.V17 = null;
+    this.V18 = null;
+    this.V19 = null;
+    this.V20 = null;
+    this.V21 = null;
+    this.V22 = null;
+    this.V23 = null;
+    this.V24 = null;
+    this.V25 = null;
+    this.V26 = null;
+    this.V27 = null;
+    this.V28 = null;
+    this.amount = null;
+  }
+}
